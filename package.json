@@ -1,0 +1,87 @@
+{
+  "name": "sasshimi",
+  "version": "0.0.0",
+  "description": "A sass manager with style injection",
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.12"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/istanbul cover node_modules/.bin/mocha -- test/specs.js && node_modules/.bin/codecov"
+  },
+  "bin": {
+    "sasshimi": "./bin/sasshimi"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubeniskov/sasshimi.git",
+    "url_commit": "git+https://github.com/rubeniskov/sasshimi/commit",
+    "url_tag": "git+https://github.com/rubeniskov/sasshimi/releases/tag"
+  },
+  "keywords": [
+    "template",
+    "minify",
+    "javascript",
+    "injection",
+    "wrapper",
+    "stream",
+    "html",
+    "angular"
+  ],
+  "author": {
+    "name": "Rubén López Gómez",
+    "email": "me@rubeniskov.com",
+    "url": "https://twitter.com/Rubeniskov"
+  },
+  "licenses": [
+    {
+      "type": "WTFPL",
+      "url": "https://github.com/rubeniskov/sasshimi/blob/master/LICENSE.md"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/rubeniskov/sasshimi/issues"
+  },
+  "homepage": "http://sasshimi.rubeniskov.com",
+  "dependencies": {
+    "browser-resolve": "^1.11.2",
+    "camelcase": "^3.0.0",
+    "glob": "^7.1.1",
+    "html-minifier": "^2.1.2",
+    "htmllint": "^0.3.0",
+    "inherify": "0.0.2",
+    "instsure": "^0.1.2",
+    "node-glob": "^1.2.0",
+    "node-sass": "^4.0.0",
+    "nomnom": "^1.8.1",
+    "optiopus": "^0.1.5",
+    "q": "^1.4.1",
+    "readable-stream": "^2.2.2",
+    "streamifier": "^0.1.1",
+    "through2": "^2.0.1",
+    "underscore": "^1.8.3",
+    "valtree": "^0.1.2",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.14.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.11.5",
+    "babel-plugin-transform-export-extensions": "^6.8.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.14.0",
+    "browserify": "^13.1.1",
+    "chai": "^3.5.0",
+    "codeclimate-test-reporter": "^0.3.1",
+    "codecov": "^1.0.1",
+    "istanbul": "^0.4.3",
+    "istanbul-combine": "^0.3.0",
+    "miniquery": "^1.1.2",
+    "mocha": "^2.4.5",
+    "watchify": "^3.8.0"
+  }
+}
