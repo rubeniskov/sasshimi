@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+const
+    pkg = require('../package.json'),
+    colour = require('colour'),
+    program = require('commander')
+    .version(pkg.version)
+    .usage('[..<flags>]'.yellow)
+    .option('-i, --input <string>', 'Input file or string sass scss or css', function(value){
+        return !process.stdin.isTTY ? 'stdin' : value;
+    })
+    .option('-m, --object-mode', 'Include path to find inlcudes')
+    .option('-p, --path <string>', 'Include path to find inlcudes')
+    .option('-o, --output <string>', 'Output compiled css file', function(value){
+        return value === undefined ? 'stdout' : value;
+    })
+    .parse(process.argv);
+
+module.exports = require('../').parse({
+    objectMode: program.objectMode,
+    paths: program.path
+}, program.input, program.output);
+
+// [path.resolve(__dirname + '/../test/fixtures/node_modules')]
