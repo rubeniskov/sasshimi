@@ -49,6 +49,9 @@
   "dependencies": {
     "browser-resolve": "^1.11.2",
     "camelcase": "^3.0.0",
+    "colour": "^0.7.1",
+    "commander": "^2.9.0",
+    "extend": "^3.0.0",
     "glob": "^7.1.1",
     "html-minifier": "^2.1.2",
     "htmllint": "^0.3.0",
