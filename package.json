@@ -38,7 +38,7 @@
   },
   "licenses": [
     {
-      "type": "WTFPL",
+      "type": "MIT",
       "url": "https://github.com/rubeniskov/sasshimi/blob/master/LICENSE.md"
     }
   ],
@@ -48,26 +48,14 @@
   "homepage": "http://sasshimi.rubeniskov.com",
   "dependencies": {
     "browser-resolve": "^1.11.2",
-    "camelcase": "^3.0.0",
     "colour": "^0.7.1",
     "commander": "^2.9.0",
     "extend": "^3.0.0",
     "glob": "^7.1.1",
-    "html-minifier": "^2.1.2",
-    "htmllint": "^0.3.0",
-    "inherify": "0.0.2",
-    "instsure": "^0.1.2",
-    "node-glob": "^1.2.0",
     "node-sass": "^4.0.0",
-    "nomnom": "^1.8.1",
-    "optiopus": "^0.1.5",
     "q": "^1.4.1",
     "readable-stream": "^2.2.2",
-    "streamifier": "^0.1.1",
-    "through2": "^2.0.1",
-    "underscore": "^1.8.3",
-    "valtree": "^0.1.2",
-    "winston": "^2.2.0"
+    "streamifier": "^0.1.1"
   },
   "devDependencies": {
     "babel": "^6.5.2",
