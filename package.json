@@ -11,7 +11,7 @@
     "test": "make test"
   },
   "bin": {
-    "sasshimi": "./bin/sasshimi"
+    "sasshimi": "bin/sasshimi"
   },
   "directories": {
     "test": "test"
