@@ -1,6 +1,6 @@
 {
   "name": "sasshimi",
-  "version": "0.0.2",
+  "version": "0.0.3-pre",
   "description": "A sass manager with style injection",
   "main": "index.js",
   "engines": {
