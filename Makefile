@@ -15,7 +15,7 @@ watch:
 	&& mkdir -p ./lib/ \
 	&& ./node_modules/.bin/babel --watch $(BABEL_FLAGS)
 
-unit:
+test:
 	@echo "Testing project ${PROJECT_NAME}" \
 	&& ./node_modules/.bin/istanbul cover \
 		 ./node_modules/.bin/mocha -- --watch test/specs.js \

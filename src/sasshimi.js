@@ -11,14 +11,34 @@ import Q from 'q'
 
 export default class Sasshimi extends Transform {
     static defaults = {
-        extensions: ['.scss', '.sass', '.css'],
+        extensions: ['.scss', '.sass', '.css', '.less'],
         paths: [],
         cwd: process.cwd(),
         quiet: false,
         objectMode: false
     }
-    static create(options) {
-        return new Sasshimi(options);
+    static done() {
+
+    }
+    static create() {
+        var schema = Sasshimi.parse(arguments),
+            stream = [];
+        if (schema.input) {
+            typeof(schema.input) === 'string' && extend(schema.options, {
+                cwd: path.dirname(schema.input)
+            });
+            stream.push(Sasshimi.createReadStream(schema.input, {
+                extensions: Sasshimi.defaults.extensions
+            }));
+        }
+        stream.push(new Sasshimi(schema.options));
+        if (schema.output) {
+            stream.push(Sasshimi.createWriteStream(schema.output));
+        }
+        return stream.reduce(function(a, b) {
+                return a.pipe(b);
+            })
+            .on('done', schema.done || Sasshimi.done);
     }
     static isPath(str, extensions) {
         return typeof(str) === 'string' && (new RegExp('(' + extensions.join('|') + ')$').test(str));
@@ -29,12 +49,21 @@ export default class Sasshimi extends Transform {
         options.paths.push(options.cwd);
         return options;
     }
-    static parse(options, input, output, cb) {
-        Sasshimi.createReadStream(input, Sasshimi.defaults)
-            .pipe(new Sasshimi(extend({
-                cwd: path.dirname(input)
-            }, options)))
-            .pipe(Sasshimi.createWriteStream(output, options));
+    static parse() {
+        var schema = {},
+            args = arguments.length === 1 && arguments[0] && arguments[0].length ? arguments[0] : arguments;
+        for (var arg, i = args.length; i--;) {
+            arg = args[i];
+            if (!schema.done && typeof(arg) === 'function')
+                schema.done = arg;
+            else if (!schema.options && typeof(arg) === 'object' && arg.constructor == Object)
+                schema.options = arg;
+            else if (!schema.output && i === 1)
+                schema.output = arg;
+            else
+                schema.input = arg;
+        }
+        return schema;
     }
     static createStream(std, type, options) {
         if (std && /readable|writable/.test(type)) {
@@ -59,12 +88,12 @@ export default class Sasshimi extends Transform {
     static createWriteStream(std, options) {
         return Sasshimi.createStream(std, 'writable', options);
     }
-    constructor(options) {
-        var self = super({
-            objectMode: options.objectMode
-        });
-        self.options = Sasshimi.parseOptions(options);
-        console.log(self.options.cwd);
+    constructor() {
+        var options = Sasshimi.parseOptions(arguments[0]),
+            self = super({
+                objectMode: options.objectMode
+            });
+        self.options = options;
         !self.options.quiet && self.on('error', function(err) {
             console.error(err);
         })
@@ -75,16 +104,17 @@ export default class Sasshimi extends Transform {
         done();
     }
     _flush(done) {
-        var self = this;
+        var self = this,
+            regexp_extension = new RegExp(self.options.extensions.join('|').replace(/\./g, '\\.') + '$');
         sass.render({
             data: this.data,
             importer: function importer(url, prev, next) {
                 var parts = url.split(path.sep),
-                    filename = parts.pop(),
+                    filename = parts.pop().replace(regexp_extension, ''),
                     dirname = parts.join(path.sep),
                     pattern = util.format('%s/%s/?(_)%s+(%s)',
-                        prev === 'stdin' ? self.options.cwd : path.dirname(prev), dirname, filename, self.options.extensions.join('|'));
-
+                        prev === 'stdin' ? self.options.cwd : path.dirname(prev), dirname || '', filename ||  '', self.options.extensions.join('|'))
+                    .replace(new RegExp(path.sep + '+', 'g'), path.sep);
                 Q.nfcall(glob, pattern, {
                         absolute: true
                     })
@@ -107,7 +137,7 @@ export default class Sasshimi extends Transform {
                             });
                     })
                     .then(function(data) {
-                        next(data)
+                        next(data);
                     })
                     .catch(function(err) {
                         done(err);
@@ -116,6 +146,7 @@ export default class Sasshimi extends Transform {
         }, function(err, result) {
             if (err)
                 return done(err);
+            self.emit('done', result);
             done(null, self.options.objectMode ? result : result.css);
         })
     }

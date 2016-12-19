@@ -20,9 +20,9 @@ const
     })
     .parse(process.argv);
 
-module.exports = require('../').parse({
+module.exports = require('../').create(program.input, program.output, {
     objectMode: program.objectMode,
     paths: program.path
-}, program.input, program.output);
+});
 
 // [path.resolve(__dirname + '/../test/fixtures/node_modules')]
