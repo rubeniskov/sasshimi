@@ -23,14 +23,12 @@
     "url_tag": "git+https://github.com/rubeniskov/sasshimi/releases/tag"
   },
   "keywords": [
-    "template",
+    "css",
     "minify",
-    "javascript",
+    "sass",
     "injection",
     "wrapper",
-    "stream",
-    "html",
-    "angular"
+    "stream"
   ],
   "author": {
     "name": "Rubén López Gómez",
