@@ -1,0 +1,7 @@
+@import 'vars';
+@import 'module-test';
+
+body {
+  color: $color;
+  background: $background;
+}
