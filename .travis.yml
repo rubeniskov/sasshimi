@@ -8,6 +8,10 @@ node_js:
   - "iojs-v1.8.4"
   - "iojs-v2.5.0"
   - "iojs-v3.3.1"
+cache:
+  bundler: true
+  directories:
+  - node_modules
 notifications:
   slack: rubeniskov:I82ZGuYOEQrhl29wBbQFEdjP#sasshimi
 install:
