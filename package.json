@@ -72,6 +72,7 @@
     "istanbul-combine": "^0.3.0",
     "miniquery": "^1.1.2",
     "mocha": "^2.4.5",
+    "npm-bump": "0.0.20",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "watchify": "^3.8.0"
