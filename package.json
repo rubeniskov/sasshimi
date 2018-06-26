@@ -8,7 +8,9 @@
   },
   "scripts": {
     "prepublish": "make build",
-    "test": "make test"
+    "test": "make test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "bin": {
     "sasshimi": "bin/sasshimi"
@@ -54,7 +56,8 @@
     "node-sass": "^4.0.0",
     "q": "^1.4.1",
     "readable-stream": "^2.2.2",
-    "streamifier": "^0.1.1"
+    "streamifier": "^0.1.1",
+    "snyk": "^1.85.0"
   },
   "devDependencies": {
     "babel": "^6.5.2",
@@ -75,5 +78,6 @@
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
     "watchify": "^3.8.0"
-  }
+  },
+  "snyk": true
 }
