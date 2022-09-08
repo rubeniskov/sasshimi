@@ -51,7 +51,7 @@
     "commander": "^2.9.0",
     "extend": "^3.0.0",
     "glob": "^7.1.1",
-    "node-sass": "^4.0.0",
+    "node-sass": "^7.0.2",
     "q": "^1.4.1",
     "readable-stream": "^2.2.2",
     "streamifier": "^0.1.1"
